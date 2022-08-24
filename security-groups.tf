@@ -29,7 +29,7 @@ resource "aws_security_group" "worker_group_mgmt_two" {
   }
 }
 
-resource "aws_security_group" "all_worker_mgmt" {
+/* resource "aws_security_group" "all_worker_mgmt" {
   name_prefix = "all_worker_management"
   vpc_id      = module.vpc.vpc_id
 
@@ -44,7 +44,7 @@ resource "aws_security_group" "all_worker_mgmt" {
       "192.168.0.0/16",
     ]
   }
-}
+} */
 resource "aws_security_group" "ingress-ssh" {
   name   = "allow-all-sg"
   vpc_id = module.vpc.vpc_id
