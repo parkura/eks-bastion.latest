@@ -11,6 +11,12 @@ provider "helm" {
   }
 }
 
+variable "jenkins_admin_user" {
+  type        = string
+  description = "Admin user of the Jenkins Application."
+  default     = "admin"
+}
+
 resource "helm_release" "jenkins" {
   name       = "jenkins"
   repository = "https://charts.jenkins.io"
@@ -22,16 +28,16 @@ resource "helm_release" "jenkins" {
 
   set_sensitive {
     name  = "controller.adminUser"
-    value = " "
+    value = var.jenkins_admin_user
   }
   set_sensitive {
     name  = "controller.adminPassword"
     value = data.aws_ssm_parameter.jenkins_password.value
   }
-  set_sensitive {
+  /* set_sensitive {
     name  = "adminPassword"
     value =  data.aws_ssm_parameter.jenkins_password.value
-  }
+  } */
 }
 
 resource "helm_release" "ingress" {
